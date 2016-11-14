@@ -117,7 +117,7 @@
 					'<td>' .
 						'<label for="gmt-donation-form-' . $amount['amount'] . '">' .
 							'<input type="radio" name="gmt_donation_form[amount]" value="' . $amount['amount'] . '" class="gmt-donation-form-amount" id="gmt-donation-form-' . $amount['amount'] . '" ' . checked( $form['details']['default_amount'], $key, false ) . '> ' .
-							esc_html( $currency[$form['options']['currency']]['symbol'] . $amount['amount'] ) .
+							esc_html( $currency[$form['options']['currency']]['symbol'] . number_format( $amount['amount'] ) ) .
 						'</label>' .
 					'</td>' .
 					'<td><label for="gmt-donation-form-' . $amount['amount'] . '">' . stripslashes( $amount['description'] ) . '</label></td>' .
@@ -791,6 +791,7 @@
 				.gmt-donation-form-alert,.gmt-donation-form-test-mode{color:#43070a;background-color:#e7cfd0;border:.0725em solid #d5abad;margin-bottom:1.5625em;padding:.25em .5em;border-radius:.0725em}
 				.gmt-donation-form-in-honor-content{background-color:#f7f7f7;padding:1em;}
 				.gmt-donation-form-in-honor-message{font-style:italic;}
+				.gmt-donation-form-actions{padding-top:1.5625em;}
 			</style>
 		<?php
 	}
