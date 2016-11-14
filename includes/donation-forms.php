@@ -367,7 +367,7 @@
 
 		// Display donation thank-you message
 		if ( $status['status'] === 'success' ) {
-			return wpautop( stripslashes( gmt_donations_create_thank_you_message( $details, $status ) ), false );
+			return wpautop( stripslashes( gmt_donations_create_thank_you_message( $details, $status ) ), true );
 		}
 
 		// Generate form
