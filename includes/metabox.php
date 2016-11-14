@@ -189,6 +189,7 @@
 		global $post;
 		$options = gmt_donations_get_theme_options();
 		$currencies = gmt_donations_settings_field_currency_choices();
+		$total = get_post_meta( $post->ID, 'gmt_donations_total_donated', true );
 
 		?>
 
@@ -198,7 +199,7 @@
 				</p>
 
 				<p>
-					<strong><?php _e( 'Total Donated' ); ?>:</strong> <a href="edit.php?post_type=gmt_donations&form=<?php echo $post->ID; ?>"><?php echo $currencies[$options['currency']]['symbol'] . esc_html( number_format( get_post_meta( $post->ID, 'gmt_donations_total_donated', true ), 2 ) );  ?></a>
+					<strong><?php _e( 'Total Donated' ); ?>:</strong> <a href="edit.php?post_type=gmt_donations&form=<?php echo $post->ID; ?>"><?php echo $currencies[$options['currency']]['symbol'] . esc_html( number_format( ( empty( $total ) ? 0 : $total ), 2 ) );  ?></a>
 				</p>
 			</div>
 
@@ -221,6 +222,7 @@
 		$saved = get_post_meta( $post->ID, 'gmt_donation_details', true );
 		$defaults = gmt_donations_metabox_details_defaults();
 		$details = wp_parse_args( $saved, $defaults );
+		$total = get_post_meta( $post->ID, 'gmt_donations_total_donated', true );
 
 		?>
 
@@ -289,7 +291,7 @@
 					</p>
 
 					<p>
-						<strong><?php _e( 'Total Donated' ); ?>:</strong> <a href="edit.php?post_type=gmt_donations&form=<?php echo $post->ID; ?>"><?php echo $currencies[$options['currency']]['symbol'] . esc_html( number_format( get_post_meta( $post->ID, 'gmt_donations_total_donated', true ), 2 ) );  ?></a>
+						<strong><?php _e( 'Total Donated' ); ?>:</strong> <a href="edit.php?post_type=gmt_donations&form=<?php echo $post->ID; ?>"><?php echo $currencies[$options['currency']]['symbol'] . esc_html( number_format( ( empty( $total ) ? 0 : $total ), 2 ) );  ?></a>
 					</p>
 				</div>
 				<br>
@@ -564,7 +566,7 @@
 		}
 
 		// Method to sort amounts by amount
-		function sort_by_amount( $a, $b ) {
+		function gmt_donations_sort_by_amount( $a, $b ) {
 		    return $a['amount'] - $b['amount'];
 		}
 
@@ -592,7 +594,7 @@
 					$amounts[$key][$id] = wp_filter_post_kses( $value );
 				}
 			}
-			usort( $amounts, 'sort_by_amount' );
+			usort( $amounts, 'gmt_donations_sort_by_amount' );
 			update_post_meta( $post->ID, 'gmt_donation_amounts', $amounts );
 		}
 
