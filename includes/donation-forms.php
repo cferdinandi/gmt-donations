@@ -357,9 +357,7 @@
 		// Variables
 		$options = gmt_donations_get_theme_options();
 		$amounts = get_post_meta( $donations['id'], 'gmt_donation_amounts', true );
-		$details_saved = get_post_meta( $donations['id'], 'gmt_donation_details', true );
-		$details_defaults = gmt_donations_metabox_details_defaults();
-		$details = wp_parse_args( $details_saved, $details_defaults );
+		$details = get_post_meta( $donations['id'], 'gmt_donation_details', true );
 		$status = gmt_donations_get_session( 'gmt_donations_status', true );
 
 		// Make sure post is a donation form
