@@ -10,7 +10,9 @@
 
 		// Variables
 		$options = gmt_donations_get_theme_options();
-		$details = get_post_meta( $donations['id'], 'gmt_donation_details', true );
+		$details_saved = get_post_meta( $id, 'gmt_donation_details', true );
+		$details_defaults = gmt_donations_metabox_details_defaults();
+		$details = wp_parse_args( $details_saved, $details_defaults );
 		$in_honor = gmt_donations_create_message_in_honor( $details, $status, 'email' );
 		$currencies = gmt_donations_settings_field_currency_choices();
 		$site_name = get_bloginfo('name');
@@ -51,7 +53,7 @@
 			$message = str_replace( '[in_honor]', $in_honor, str_replace( '[email]', $status['email'], str_replace( '[amount]', $currencies[$options['currency']]['symbol'] . $status['amount'], $details['standard_email_text'] ) ) );
 
 			// Send email
-			$mail = @wp_mail( get_option('admin_email'), $subject, $message, $headers );
+			@wp_mail( get_option('admin_email'), $subject, $message, $headers );
 
 		}
 
@@ -72,7 +74,9 @@
 
 		// Get settings
 		$options = gmt_donations_get_theme_options();
-		$details = get_post_meta( $donations['id'], 'gmt_donation_details', true );
+		$details_saved = get_post_meta( $id, 'gmt_donation_details', true );
+		$details_defaults = gmt_donations_metabox_details_defaults();
+		$details = wp_parse_args( $details_saved, $details_defaults );
 
 		// Only run if honorees should receive emails
 		if ( $details['send_in_honor_email'] === 'off' ) return;
