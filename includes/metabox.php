@@ -546,6 +546,13 @@
 
 
 
+	// Method to sort amounts by amount
+	function gmt_donations_sort_by_amount( $a, $b ) {
+		return $a['amount'] - $b['amount'];
+	}
+
+
+
 	/**
 	 * Save the metabox
 	 * @param  Number $post_id The post ID
@@ -563,11 +570,6 @@
 		// Verify user has permission to edit post
 		if ( !current_user_can( 'edit_post', $post->ID )) {
 			return $post->ID;
-		}
-
-		// Method to sort amounts by amount
-		function gmt_donations_sort_by_amount( $a, $b ) {
-		    return $a['amount'] - $b['amount'];
 		}
 
 		// Sanitize and save details
