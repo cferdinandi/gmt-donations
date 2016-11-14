@@ -575,7 +575,7 @@
 		// Sanitize and save details
 		if ( isset( $_POST['gmt_donation_details'] ) ) {
 			$details = array();
-			$checkboxes = array( 'show_other_amount', 'show_recurring', 'show_in_honor', 'show_goal', 'standard_send_email', 'big_donor_unique_message', 'big_donor_send_email', 'recurring_unique_message', 'recurring_send_email' );
+			$checkboxes = array( 'show_goal', 'show_other_amount', 'show_recurring', 'show_in_honor', 'send_in_honor_email', 'standard_send_email', 'big_donor_unique_message', 'big_donor_send_email', 'recurring_unique_message', 'recurring_send_email' );
 			foreach ( $_POST['gmt_donation_details'] as $key => $detail ) {
 				$details[$key] = wp_filter_post_kses( $detail );
 			}
