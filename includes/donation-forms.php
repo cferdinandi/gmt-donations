@@ -793,7 +793,7 @@
 				.gmt-donation-form-goal-thermometer-progress{float:left;width:0;height:100%;color:#ffffff;background-color:#880e14;box-sizing:border-box;}
 				.gmt-donation-form-goal-thermometer-small-percentage .gmt-donation-form-goal-thermometer-progress{margin-right:0.5em;}
 				.gmt-donation-form-goal-thermometer-goal-met .gmt-donation-form-goal-thermometer-progress{background-color:#377f31;}
-				.gmt-donation-form-alert,.gmt-donation-form-test-mode{color:#43070a;background-color:#e7cfd0;border:.0725em solid #d5abad;margin-bottom:1.5625em;padding:.25em .5em;border-radius:.0725em}
+				.gmt-donation-form-alert,.gmt-donation-form-test-mode{color:#43070a;background-color:#e7cfd0;border:.0725em solid #d5abad;margin-bottom:1.5625em;padding:.25em .5em;}
 				.gmt-donation-form-in-honor-content{background-color:#f7f7f7;padding:1em;}
 				.gmt-donation-form-in-honor-message{font-style:italic;}
 				.gmt-donation-form-actions{padding-top:1.5625em;}
