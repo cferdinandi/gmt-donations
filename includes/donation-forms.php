@@ -238,7 +238,7 @@
 		return
 			( $form['options']['api_mode'] === 'test' ? '<div class="gmt-donation-form-test-mode">' . __( 'You are in test/sandbox mode.', 'gmt_donations' ) . '</div>' : '' ) .
 			$thermometer .
-			'<form class="gmt-donation-form" id="gmt-donation-form-' . esc_attr( $form['id'] ) . '" name="gmt-donation-form-' . esc_attr( $form['id'] ) . '" action="" method="post">' .
+			'<form class="gmt-donation-form" id="gmt-donation-form-' . esc_attr( $form['id'] ) . '" name="gmt-donation-form-' . esc_attr( $form['id'] ) . '" action="" method="post" data-loading="' . plugins_url( 'js/loading.gif' , __FILE__ ) . '">' .
 
 				'<table class="gmt-donation-form-table">' .
 					'<tr>' .
@@ -773,7 +773,12 @@
 		global $post;
 		if ( !is_a( $post, 'WP_Post' ) || !has_shortcode( $post->post_content, 'donation_form') ) return;
 		?>
-			<style type="text/css">.gmt-donation-form-tarpit{display:none;visibility:hidden;}</style>
+			<style type="text/css">
+				.gmt-donation-form-tarpit{display:none;visibility:hidden;}
+				.gmt-donations-loading{background-color:#000000;bottom:0;position:fixed;left:0;opacity:.6;right:0;top:0;z-index:9998;}
+				.gmt-donations-loading-wrap{color:#ffffff;display:table;height:100%;text-align:center;width:100%;}
+				.gmt-donations-loading-content{display:table-cell;vertical-align:middle;}
+			</style>
 		<?php
 
 		// Add additional form styles

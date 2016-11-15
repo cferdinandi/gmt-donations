@@ -90,10 +90,15 @@
 			amount: amount,
 			token: function(token, args) {
 				var input = document.createElement('input');
+				var loading = document.createElement('div');
+				var spinner = form.getAttribute( 'data-loading' );
 				input.type = 'hidden';
 				input.value = token.id;
 				input.name = 'stripe_token';
+				loading.className = 'gmt-donations-loading';
+				loading.innerHTML = '<div class="gmt-donations-loading-wrap"><div class="gmt-donations-loading-content"><img height="75" width="75" alt="processing" src="' + spinner + '"></div></div>';
 				form.insertBefore( input, form.childNodes[0] );
+				form.parentNode.insertBefore( loading, form );
 				form.submit();
 			}
 		});
