@@ -83,6 +83,8 @@ At the top of the `Donation Details` for your donation form is a shortcode. Copy
 
 If you're running a special campaign, you may want to set a financial goal and track progress against it. GMT Donations lets you easily add a goal thermometer to any donation form.
 
+![A goal thermometer](screenshots/goal-thermometer.jpg)
+
 Under `Donation Details` > `Campaign Goals` for your form, check `Show campaign goal thermometer` and add a target fundraising goal. GMT Donations handles the rest, displaying a goal thermometer above your form that updates in real time and changes color once your goal is met.
 
 
@@ -91,7 +93,11 @@ Under `Donation Details` > `Campaign Goals` for your form, check `Show campaign 
 
 A record for every donor and donation is saved in your database. These can be accessed under `Donations` in the WordPress dashboard, under `Donors` and `Donations`, respectively.
 
+![Donations reporting](screenshots/donations-reporting.jpg)
+
 GMT Donations tracks donations amounts, who made the donation, whether or not it's recurring and in honor of someone, which form it were submitted to, and what payment gateway was used.
+
+![Donor Reporting](screenshots/donor-reporting.jpg)
 
 You can also view how many donations a particular donor has made over time and their total donation amount, as well as view their individual donations.
 
