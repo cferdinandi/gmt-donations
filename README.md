@@ -1,6 +1,8 @@
 # GMT Donations
 A WordPress plugin that lets you create powerful donation forms that integrate with Stripe and PayPal Express Checkout. See a live working example on [PAWS New England](https://pawsnewengland.com/donate/).
 
+![An example donation form](screenshots/donation-form.jpg)
+
 [Download GMT Donations](https://github.com/cferdinandi/gmt-donations/archive/master.zip)
 
 
@@ -66,6 +68,8 @@ This is also configured under `Donations` > `Settings` in the WordPress Dashboar
 ### 4. Create your donation form
 
 Add a new form under `Donations` > `Add New` in the WordPress Dashboard.
+
+![How to create a donation form](screenshots/create-donation-form.jpg)
 
 Here you can set your donation amounts and add thank you messages and emails. You can also control whether you want to allow visitors to also write in their own donation amount, make a donation recurring, and donate in honor of someone.
 
