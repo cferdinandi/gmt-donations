@@ -1,0 +1,32 @@
+.gmt-donations-dashboard-row {
+	margin-left: -1.4%;
+	margin-right: -1.4%;
+}
+
+.gmt-donations-dashboard-grid {
+	box-sizing: border-box;
+	float: left;
+	padding-left: 1.4%;
+	padding-right: 1.4%;
+	width: 100%;
+}
+
+@media (min-width: 40em) {
+	.gmt-donations-dashboard-grid {
+		width: 50%;
+	}
+}
+
+.gmt-donations-dashboard-container:before,
+.gmt-donations-dashboard-container:after {
+	display: table;
+	content: " ";
+}
+
+.gmt-donations-dashboard-container:after {
+	clear: both;
+}
+
+.gmt-donations-dashboard-sub {
+	border-top: 1px solid #eee;
+}

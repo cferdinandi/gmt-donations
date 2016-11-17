@@ -1,22 +1,6 @@
 <?php
 
 	/**
-	 * Get total amount of money donated
-	 * @param  object $donations All donations to total up
-	 * @return integer           Total donated
-	 */
-	function gmt_donations_get_total_donated( $donations ) {
-		$total = 0;
-		foreach( $donations as $donation ) {
-			$amount = get_post_meta( $donation->ID, 'gmt_donations_amount', true );
-			$total += $amount;
-		}
-		return $total;
-	}
-
-
-
-	/**
 	 * Create donation and donor records in the database
 	 * @param  integer $id     The form ID
 	 * @param  array   $status The donation data

@@ -128,3 +128,43 @@
 
 		return $activated;
 	}
+
+
+
+	//
+	// Reporting
+	//
+
+	/**
+	 * Get total amount of money donated
+	 * @param  object $donations All donations to total up
+	 * @return integer           Total donated
+	 */
+	function gmt_donations_get_total_donated( $donations ) {
+		$total = 0;
+		foreach( $donations as $donation ) {
+			$amount = get_post_meta( $donation->ID, 'gmt_donations_amount', true );
+			$total += $amount;
+		}
+		return $total;
+	}
+
+
+
+	/**
+	 * Get donations or donors by date
+	 * @param  array   $donations  Donations
+	 * @param  integer $start      Start date as a timestamp
+	 * @param  integer $end        End date as a timestampe
+	 * @return array               Donations that fall beteween the dates
+	 */
+	function gmt_donations_get_donations_by_date( $donations, $start, $end ) {
+		$donations_by_date = array();
+		foreach( $donations as $key => $donation ) {
+			$donation_time = strtotime( $donation->post_date_gmt );
+			if ( $donation_time >= $start && $donation_time <= $end ) {
+				$donations_by_date[] = $donation;
+			}
+		}
+		return $donations_by_date;
+	}

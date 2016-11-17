@@ -5,7 +5,7 @@
  * Plugin URI: https://github.com/cferdinandi/gmt-donations/
  * GitHub Plugin URI: https://github.com/cferdinandi/gmt-donations/
  * Description: Create powerful donation forms that integrate with Stripe and PayPal Express Checkout. Adjust settings under <a href="edit.php?post_type=gmt_donation_forms&page=gmt_donations_options">Donations &rarr; Settings</a>.
- * Version: 1.1.0
+ * Version: 1.2.0
  * Author: Chris Ferdinandi
  * Author URI: http://gomakethings.com
  * License: GPLv3
@@ -28,6 +28,7 @@ require_once( plugin_dir_path( __FILE__ ) . 'includes/metabox.php' );
 
 // Reporting
 require_once( plugin_dir_path( __FILE__ ) . 'includes/reporting.php' );
+require_once( plugin_dir_path( __FILE__ ) . 'includes/dashboard.php' );
 
 // Donation form shortcodes and process
 require_once( plugin_dir_path( __FILE__ ) . 'includes/donation-forms.php' );
