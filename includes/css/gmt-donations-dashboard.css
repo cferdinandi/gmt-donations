@@ -11,7 +11,7 @@
 	width: 100%;
 }
 
-@media (min-width: 40em) {
+@media (min-width: 25em) {
 	.gmt-donations-dashboard-grid {
 		width: 50%;
 	}
