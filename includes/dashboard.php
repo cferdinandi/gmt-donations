@@ -25,23 +25,39 @@
 		$options = gmt_donations_get_theme_options();
 		$currencies = gmt_donations_settings_field_currency_choices();
 
-		// Dates
-		$month_start = strtotime(date('Y-m-01'));
-		$month_end = strtotime(date('Y-m-t 23:59:59'));
-		$last_month_start = strtotime(date('Y-m-d', mktime(0, 0, 0, date('m')-1, 1)));
-		$last_month_end = strtotime(date('Y-m-d', mktime(0, 0, 0, date('m'), 0)));
-		$year_start = strtotime(date('Y-01-01'));
-		$year_end = strtotime(date('Y-12-31 23:59:59'));
-
 		// Donations
 		$donations = get_posts(array(
 			'numberposts' => -1,
 			'post_status' => 'publish',
 			'post_type' => 'gmt_donations',
 		));
-		$donations_this_month = gmt_donations_get_donations_by_date( $donations, $month_start, $month_end );
-		$donations_last_month = gmt_donations_get_donations_by_date( $donations, $last_month_start, $last_month_end );
-		$donations_this_year = gmt_donations_get_donations_by_date( $donations, $year_start, $year_end );
+		$donations_this_month = get_posts(array(
+			'numberposts' => -1,
+			'post_status' => 'publish',
+			'post_type' => 'gmt_donations',
+			'date_query' => array(
+				'after' => date('Y-m-01'),
+				'before' => date('Y-m-t 23:59:59'),
+			)
+		));
+		$donations_last_month = get_posts(array(
+			'numberposts' => -1,
+			'post_status' => 'publish',
+			'post_type' => 'gmt_donations',
+			'date_query' => array(
+				'after' => date('Y-m-d', mktime(0, 0, 0, date('m')-1, 1)),
+				'before' => date('Y-m-d', mktime(0, 0, 0, date('m'), 0)),
+			)
+		));
+		$donations_this_year = get_posts(array(
+			'numberposts' => -1,
+			'post_status' => 'publish',
+			'post_type' => 'gmt_donations',
+			'date_query' => array(
+				'after' => date('Y-01-01'),
+				'before' => date('Y-m-t 23:59:59'),
+			)
+		));
 
 		// Donors
 		$donors = get_posts(array(
@@ -49,9 +65,33 @@
 			'post_status' => 'publish',
 			'post_type' => 'gmt_donors',
 		));
-		$donors_this_month = gmt_donations_get_donations_by_date( $donors, $month_start, $month_end );
-		$donors_last_month = gmt_donations_get_donations_by_date( $donors, $last_month_start, $last_month_end );
-		$donors_this_year = gmt_donations_get_donations_by_date( $donors, $year_start, $year_end );
+		$donors_this_month = get_posts(array(
+			'numberposts' => -1,
+			'post_status' => 'publish',
+			'post_type' => 'gmt_donors',
+			'date_query' => array(
+				'after' => date('Y-m-01'),
+				'before' => date('Y-m-t 23:59:59'),
+			)
+		));
+		$donors_last_month = get_posts(array(
+			'numberposts' => -1,
+			'post_status' => 'publish',
+			'post_type' => 'gmt_donors',
+			'date_query' => array(
+				'after' => date('Y-m-d', mktime(0, 0, 0, date('m')-1, 1)),
+				'before' => date('Y-m-d', mktime(0, 0, 0, date('m'), 0)),
+			)
+		));
+		$donors_this_year = get_posts(array(
+			'numberposts' => -1,
+			'post_status' => 'publish',
+			'post_type' => 'gmt_donors',
+			'date_query' => array(
+				'after' => date('Y-01-01'),
+				'before' => date('Y-m-t 23:59:59'),
+			)
+		));
 
 		?>
 		<div class="main gmt-donations-dashboard-container">
@@ -69,8 +109,8 @@
 							<a href="edit.php?s&post_status=publish&post_type=gmt_donations&action=-1&m=<?php echo date( 'Ym' ); ?>&filter_action=Filter&paged=1&action2=-1"><?php echo esc_html( $currencies[$options['currency']]['symbol'] . number_format( gmt_donations_get_total_donated( $donations_this_month ), 2 ) ); ?></a>
 						</li>
 					</ul>
-					<br>
-
+				</div>
+				<div class="gmt-donations-dashboard-grid">
 					<p><strong><?php _e( 'Last Month', 'gmt_donations' ) ?></strong></p>
 					<ul>
 						<li>
@@ -84,6 +124,8 @@
 						</li>
 					</ul>
 				</div>
+			</div>
+			<div class="gmt-donations-dashboard-row">
 				<div class="gmt-donations-dashboard-grid">
 					<p><strong><?php _e( 'This Year', 'gmt_donations' ) ?></strong></p>
 					<ul>
@@ -97,8 +139,8 @@
 							<a href="edit.php?post_type=gmt_donations"><?php echo esc_html( $currencies[$options['currency']]['symbol'] . number_format( gmt_donations_get_total_donated( $donations_this_year ), 2 ) ); ?></a>
 						</li>
 					</ul>
-					<br>
-
+				</div>
+				<div class="gmt-donations-dashboard-grid">
 					<p><strong><?php _e( 'Total', 'gmt_donations' ) ?></strong></p>
 					<ul>
 						<li>
