@@ -123,7 +123,7 @@
 					if ( $key === 5 ) break;
 					$form = get_post( get_post_meta( $donation->ID, 'gmt_donations_form', true ) );
 					$donor = get_post( get_post_meta( $donation->ID, 'gmt_donations_donor', true ) );
-					echo '<li><a href="post.php?post=' . $donation->ID . '&action=edit">' . esc_html( $currencies[$options['currency']]['symbol'] . number_format( get_post_meta( $donation->ID, 'gmt_donations_amount', true ), 2 ) ) . '</a> ' . _( 'from', 'gmt_donations' ) . ' <a href="post.php?post=' . $donor->ID . '&action=edit">' . $donor->post_title . '</a> ' . __( 'on', 'gmt_donations' ) . ' ' . get_the_date( 'M j, Y', $donation->ID ) . ' ' . __( 'to', 'gmt_donations' ) . ' <a href="post.php?post=' . $form->ID . '&action=edit">' . $form->post_title . '</a></li>';
+					echo '<li><a href="post.php?post=' . $donation->ID . '&action=edit">' . esc_html( $currencies[$options['currency']]['symbol'] . number_format( get_post_meta( $donation->ID, 'gmt_donations_amount', true ), 2 ) ) . '</a> ' . __( 'from', 'gmt_donations' ) . ' <a href="post.php?post=' . $donor->ID . '&action=edit">' . $donor->post_title . '</a> ' . __( 'on', 'gmt_donations' ) . ' ' . get_the_date( 'M j, Y', $donation->ID ) . ' ' . __( 'to', 'gmt_donations' ) . ' <a href="post.php?post=' . $form->ID . '&action=edit">' . $form->post_title . '</a></li>';
 				} ?>
 			</ul>
 		</div>
