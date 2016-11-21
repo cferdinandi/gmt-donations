@@ -5,7 +5,7 @@
  * Plugin URI: https://github.com/cferdinandi/gmt-donations/
  * GitHub Plugin URI: https://github.com/cferdinandi/gmt-donations/
  * Description: Create powerful donation forms that integrate with Stripe and PayPal Express Checkout. Adjust settings under <a href="edit.php?post_type=gmt_donation_forms&page=gmt_donations_options">Donations &rarr; Settings</a>.
- * Version: 1.4.0
+ * Version: 1.5.0
  * Author: Chris Ferdinandi
  * Author URI: http://gomakethings.com
  * License: GPLv3
@@ -49,6 +49,23 @@ function gmt_donations_configure_settings_admin_notice() {
 	<?php
 }
 add_action( 'admin_notices', 'gmt_donations_configure_settings_admin_notice' );
+
+
+/**
+ * Display SSL notice if site is not encrypted and Stripe is selected as a gateway
+ */
+function gmt_donations_ssl_admin_notice() {
+
+	if ( !gmt_donations_api_is_activated( 'stripe' ) ) return;
+	if ( gmt_donations_is_ssl( false ) ) return;
+
+	?>
+
+		<div class="notice notice-error"><p><strong>GMT Donations:</strong> <?php printf( __( 'Your site must have %s enabled in order to use %s, in accordance with their guidelines. This plugin will not display a Stripe button in Live mode if SSL is not enabled.', 'gmt_donations' ), 'HTTP/SSL', 'Stripe' ); ?></p></div>
+
+	<?php
+}
+add_action( 'admin_notices', 'gmt_donations_ssl_admin_notice' );
 
 
 /**

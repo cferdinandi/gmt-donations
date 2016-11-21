@@ -168,3 +168,16 @@
 		}
 		return $donations_by_date;
 	}
+
+
+
+	/**
+	 * Check if SSL is enabled for the site
+	 * @param boolean $test_mode If true, report SSL when in test mode even if not
+	 */
+	function gmt_donations_is_ssl( $test_mode = true ) {
+		if ( !empty( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] != 'off' ) return true;
+		$options = gmt_donations_get_theme_options();
+		if ( $test_mode && $options['api_mode'] === 'test' ) return true;
+		return false;
+	}
