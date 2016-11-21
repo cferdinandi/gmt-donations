@@ -27,7 +27,7 @@
 			$message = str_replace( '[in_honor]', $in_honor, str_replace( '[email]', $status['email'], str_replace( '[amount]', $currencies[$options['currency']]['symbol'] . $status['amount'], $details['recurring_email_text'] ) ) );
 
 			// Send email
-			@wp_mail( get_option('admin_email'), $subject, $message, $headers );
+			@wp_mail( sanitize_email( $status['email'] ), $subject, $message, $headers );
 			return;
 
 		}
@@ -40,7 +40,7 @@
 			$message = str_replace( '[in_honor]', $in_honor, str_replace( '[email]', $status['email'], str_replace( '[amount]', $currencies[$options['currency']]['symbol'] . $status['amount'], $details['big_donor_email_text'] ) ) );
 
 			// Send email
-			@wp_mail( get_option('admin_email'), $subject, $message, $headers );
+			@wp_mail( sanitize_email( $status['email'] ), $subject, $message, $headers );
 			return;
 
 		}
@@ -53,7 +53,7 @@
 			$message = str_replace( '[in_honor]', $in_honor, str_replace( '[email]', $status['email'], str_replace( '[amount]', $currencies[$options['currency']]['symbol'] . $status['amount'], $details['standard_email_text'] ) ) );
 
 			// Send email
-			@wp_mail( get_option('admin_email'), $subject, $message, $headers );
+			@wp_mail( sanitize_email( $status['email'] ), $subject, $message, $headers );
 
 		}
 
@@ -92,7 +92,7 @@
 		$message = str_replace( '[donor]', $donor, str_replace( '[name]', $status['in_honor_name'], str_replace( '[amount]', $currencies[$options['currency']]['symbol'] . $status['amount'], $details['in_honor_email_message'] ) ) );
 
 		// Send email
-		@wp_mail( get_option('admin_email'), $subject, $message, $headers );
+		@wp_mail( sanitize_email( $status['in_honor_email'] ), $subject, $message, $headers );
 
 	}
 	add_action( 'gmt_donation_success', 'gmt_donations_send_in_honor_honoree_email', 10, 2 );
