@@ -1,5 +1,19 @@
 <?php
 
+
+	/**
+	 * Set form totals when forms are first created
+	 */
+	function gmt_donation_forms_set_totals_defaults( $post ) {
+		if ( get_post_type( $post_id ) !== 'gmt_donation_forms' ) return;
+		update_post_meta( $post->ID, 'gmt_donations_count_donated', 0 );
+		update_post_meta( $post->ID, 'gmt_donations_total_donated', 0 );
+	}
+	add_action( 'new_to_publish', 'gmt_donation_forms_set_totals_defaults' );
+	add_action( 'auto-draft_to_publish', 'gmt_donation_forms_set_totals_defaults' );
+
+
+
 	/**
 	 * Create donation and donor records in the database
 	 * @param  integer $id     The form ID
@@ -155,6 +169,8 @@
 		$new = array();
 		foreach( $columns as $key => $title ) {
 			if ( $key == 'date' ) {
+				$new['count_donated'] = __( 'Donations', 'gmt_donations' );
+				$new['total_donated'] = __( 'Total Donated', 'gmt_donations' );
 				$new['description'] = __( 'Description', 'gmt_donations' );
 			}
 			$new[$key] = $title;
@@ -176,12 +192,63 @@
 		if ( get_post_type( $post_id ) !== 'gmt_donation_forms' ) return;
 
 		// Add custom column content
+		if ( $column === 'count_donated' ) {
+			$count = get_post_meta( $post_id, 'gmt_donations_count_donated', true );
+			echo esc_html( empty( $count ) ? 0 : $count );
+		}
+
+		if ( $column === 'total_donated' ) {
+			$options = gmt_donations_get_theme_options();
+			$currencies = gmt_donations_settings_field_currency_choices();
+			$total = get_post_meta( $post_id, 'gmt_donations_total_donated', true );
+			echo $currencies[$options['currency']]['symbol'] . esc_html( number_format( ( empty( $total ) ? 0 : $total ), 2 ) );
+		}
+
 		if ( $column === 'description' ) {
 			echo get_the_excerpt( $post_id );
 		}
 
 	}
 	add_action( 'manage_posts_custom_column', 'gmt_donation_forms_admin_table_columns_content', 10, 2 );
+
+
+
+	/**
+	 * Register donations fields as sortable
+	 * @param  array $columns Existing columns
+	 * @return array          Updated array with new columns
+	 */
+	function gmt_donations_form_admin_table_sortable_columns( $sortable ) {
+		$sortable['count_donated'] = 'count_donated';
+		$sortable['total_donated'] = 'total_donated';
+		return $sortable;
+	}
+	add_filter( 'manage_edit-gmt_donation_forms_sortable_columns', 'gmt_donations_form_admin_table_sortable_columns' );
+
+
+
+	/**
+	 * Sort donation form fields
+	 * @param  object $query The query
+	 */
+	function gmt_donation_forms_admin_table_sortable_columns_sorting( $query ) {
+
+		if ( !is_admin() || empty( $query->get( 'orderby' ) ) || !isset( $_GET['post_type'] ) || $_GET['post_type'] !== 'gmt_donation_forms' ) return;
+
+		$orderby = $query->get( 'orderby' );
+
+		if ( $orderby === 'count_donated' ) {
+			$query->set( 'meta_key', 'gmt_donations_count_donated' );
+			$query->set( 'orderby', 'meta_value_num' );
+		}
+
+		if ( $orderby === 'total_donated' ) {
+			$query->set( 'meta_key', 'gmt_donations_total_donated' );
+			$query->set( 'orderby', 'meta_value_num' );
+		}
+
+	}
+	add_action( 'pre_get_posts', 'gmt_donation_forms_admin_table_sortable_columns_sorting' );
 
 
 
