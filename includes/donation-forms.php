@@ -397,9 +397,10 @@
 			$plan = \Stripe\Plan::create(array(
 				'amount' => $amount * 100,
 				'interval' => 'month',
-				'name' => __( 'Monthly Donation' ,'gmt_donations' ) . ': ' . $currencies[$currency]['symbol'] . $amount,
+				'name' => __( 'Monthly Donation' ,'gmt_donations' ) . ': ' . html_entity_decode( $currencies[$currency]['symbol'] ) . $amount,
 				'currency' => $currency,
 				'id' => 'donation_' . $amount,
+				'statement_descriptor' => __( 'Monthly Donation', 'gmt_donations' ),
 			));
 		} catch (Exception $e) {
 			return $e;
@@ -506,6 +507,8 @@
 					'amount' => $amount * 100,
 					'currency' => $options['currency'],
 					'card' => $token,
+					'description' => __( 'Donation', 'gmt_donations' ),
+					'statement_descriptor' => __( 'Donation', 'gmt_donations' ),
 				)
 			);
 		} catch (Exception $e) {
@@ -568,6 +571,7 @@
 				'PAYMENTREQUEST_0_PAYMENTACTION' => 'SALE',
 				'PAYMENTREQUEST_0_AMT' => $checkoutResponse['PAYMENTREQUEST_0_AMT'],
 				'PAYMENTREQUEST_0_CURRENCYCODE' => strtoupper( $options['currency'] ),
+				'PAYMENTREQUEST_n_DESC' => __( 'Donation', 'gmt_donations' ),
 			);
 		}
 		$doCheckoutResponse = gmt_paypal_call_api( $doCheckoutArgs, $credentials, $options['api_mode'] );
