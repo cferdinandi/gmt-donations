@@ -178,6 +178,9 @@
 				<?php _e( 'PayPal Express Checkout', 'gmt_donations' ); ?>
 			</label>
 		</div>
+		<br>
+
+		<p><em><strong><?php _e( 'Note', 'gmt_donations' ) ?>:</strong> <?php printf( __( 'Your site must have %s enabled in order to use %s, in accordance with their guidelines. This plugin will not display a Stripe button in Live mode if SSL is not enabled.', 'gmt_donations' ), 'HTTP/SSL', 'Stripe' ); ?></em></p>
 		<?php
 	}
 
