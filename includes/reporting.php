@@ -177,7 +177,7 @@
 
 		// Add custom column content
 		if ( $column === 'description' ) {
-			echo get_the_excerpt( $post->ID );
+			echo get_the_excerpt( $post_id );
 		}
 
 	}
@@ -244,8 +244,12 @@
 		}
 
 		if ( $column === 'form' ) {
-			$form = get_post( get_post_meta( $post_id, 'gmt_donations_form', true ) );
-			if ( empty( $form ) ) {
+			$form_id = get_post_meta( $post_id, 'gmt_donations_form', true );
+			$form = get_post( $form_id );
+			if ( intval( $form_id ) === -1 ) {
+				$invoice_id = get_post_meta( $post_id, 'gmt_donation_invoice_id', true );
+				echo '<a href="post.php?post=' . $invoice_id . '&action=edit">' . __( 'Invoice', 'gmt_donations' ) . ' ' . $invoice_id . '</a>';
+			} elseif ( empty( $form ) ) {
 				echo '<em>' . __( 'Deleted' ) . '</em>';
 			} else {
 				echo '<a href="post.php?post=' . $form->ID . '&action=edit">' . $form->post_title . '</a>';
