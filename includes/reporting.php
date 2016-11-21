@@ -5,7 +5,7 @@
 	 * Set form totals when forms are first created
 	 */
 	function gmt_donation_forms_set_totals_defaults( $post ) {
-		if ( get_post_type( $post_id ) !== 'gmt_donation_forms' ) return;
+		if ( get_post_type( $post->ID ) !== 'gmt_donation_forms' ) return;
 		update_post_meta( $post->ID, 'gmt_donations_count_donated', 0 );
 		update_post_meta( $post->ID, 'gmt_donations_total_donated', 0 );
 	}
