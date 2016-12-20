@@ -23,8 +23,8 @@
 		if ( $status['recurring'] && $details['recurring_send_email'] === 'on' && !empty( $details['recurring_email_subject'] ) && !empty( $details['recurring_email_text'] ) ) {
 
 			// Variables
-			$subject = str_replace( '[amount]', $currencies[$options['currency']]['symbol'] . $status['amount'], $details['recurring_email_subject'] );
-			$message = str_replace( '[in_honor]', $in_honor, str_replace( '[email]', $status['email'], str_replace( '[amount]', $currencies[$options['currency']]['symbol'] . $status['amount'], $details['recurring_email_text'] ) ) );
+			$subject = str_replace( '[amount]', html_entity_decode( $currencies[$options['currency']]['symbol'] ) . $status['amount'], $details['recurring_email_subject'] );
+			$message = str_replace( '[in_honor]', $in_honor, str_replace( '[email]', $status['email'], str_replace( '[amount]', html_entity_decode( $currencies[$options['currency']]['symbol'] ) . $status['amount'], $details['recurring_email_text'] ) ) );
 
 			// Send email
 			@wp_mail( sanitize_email( $status['email'] ), $subject, $message, $headers );
@@ -36,8 +36,8 @@
 		if ( $details['big_donor_send_email'] === 'on' && $details['big_donor_amount'] <= $status['amount'] && !empty( $details['big_donor_email_subject'] ) && !empty( $details['big_donor_email_text'] ) ) {
 
 			// Variables
-			$subject = str_replace( '[amount]', $currencies[$options['currency']]['symbol'] . $status['amount'], $details['big_donor_email_subject'] );
-			$message = str_replace( '[in_honor]', $in_honor, str_replace( '[email]', $status['email'], str_replace( '[amount]', $currencies[$options['currency']]['symbol'] . $status['amount'], $details['big_donor_email_text'] ) ) );
+			$subject = str_replace( '[amount]', html_entity_decode( $currencies[$options['currency']]['symbol'] ) . $status['amount'], $details['big_donor_email_subject'] );
+			$message = str_replace( '[in_honor]', $in_honor, str_replace( '[email]', $status['email'], str_replace( '[amount]', html_entity_decode( $currencies[$options['currency']]['symbol'] ) . $status['amount'], $details['big_donor_email_text'] ) ) );
 
 			// Send email
 			@wp_mail( sanitize_email( $status['email'] ), $subject, $message, $headers );
@@ -49,8 +49,8 @@
 		if ( $details['standard_send_email'] === 'on' && !empty( $details['standard_email_subject'] ) && !empty( $details['standard_email_text'] ) ) {
 
 			// Variables
-			$subject = str_replace( '[amount]', $currencies[$options['currency']]['symbol'] . $status['amount'], $details['standard_email_subject'] );
-			$message = str_replace( '[in_honor]', $in_honor, str_replace( '[email]', $status['email'], str_replace( '[amount]', $currencies[$options['currency']]['symbol'] . $status['amount'], $details['standard_email_text'] ) ) );
+			$subject = str_replace( '[amount]', html_entity_decode( $currencies[$options['currency']]['symbol'] ) . $status['amount'], $details['standard_email_subject'] );
+			$message = str_replace( '[in_honor]', $in_honor, str_replace( '[email]', $status['email'], str_replace( '[amount]', html_entity_decode( $currencies[$options['currency']]['symbol'] ) . $status['amount'], $details['standard_email_text'] ) ) );
 
 			// Send email
 			@wp_mail( sanitize_email( $status['email'] ), $subject, $message, $headers );
@@ -88,8 +88,8 @@
 		$headers = 'From: ' . $site_name . ' <donotreply@' . $domain . '>' . "\r\n";
 
 		// Create email content
-		$subject = str_replace( '[donor]', $donor, str_replace( '[name]', $status['in_honor_name'], str_replace( '[amount]', $currencies[$options['currency']]['symbol'] . $status['amount'], $details['in_honor_email_subject'] ) ) );
-		$message = str_replace( '[donor]', $donor, str_replace( '[name]', $status['in_honor_name'], str_replace( '[amount]', $currencies[$options['currency']]['symbol'] . $status['amount'], $details['in_honor_email_message'] ) ) );
+		$subject = str_replace( '[donor]', $donor, str_replace( '[name]', $status['in_honor_name'], str_replace( '[amount]', html_entity_decode( $currencies[$options['currency']]['symbol'] ) . $status['amount'], $details['in_honor_email_subject'] ) ) );
+		$message = str_replace( '[donor]', $donor, str_replace( '[name]', $status['in_honor_name'], str_replace( '[amount]', html_entity_decode( $currencies[$options['currency']]['symbol'] ) . $status['amount'], $details['in_honor_email_message'] ) ) );
 
 		// Send email
 		@wp_mail( sanitize_email( $status['in_honor_email'] ), $subject, $message, $headers );
