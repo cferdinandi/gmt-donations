@@ -88,8 +88,8 @@
 		$headers = 'From: ' . $site_name . ' <donotreply@' . $domain . '>' . "\r\n";
 
 		// Create email content
-		$subject = str_replace( '[donor]', $donor, str_replace( '[name]', $status['in_honor_name'], str_replace( '[amount]', html_entity_decode( $currencies[$options['currency']]['symbol'] ) . $status['amount'], $details['in_honor_email_subject'] ) ) );
-		$message = str_replace( '[donor]', $donor, str_replace( '[name]', $status['in_honor_name'], str_replace( '[amount]', html_entity_decode( $currencies[$options['currency']]['symbol'] ) . $status['amount'], $details['in_honor_email_message'] ) ) );
+		$subject = str_replace( '[donor]', $status['in_honor_donor'], str_replace( '[name]', $status['in_honor_name'], str_replace( '[amount]', html_entity_decode( $currencies[$options['currency']]['symbol'] ) . $status['amount'], $details['in_honor_email_subject'] ) ) );
+		$message = str_replace( '[donor]', $status['in_honor_donor'], str_replace( '[name]', $status['in_honor_name'], str_replace( '[amount]', html_entity_decode( $currencies[$options['currency']]['symbol'] ) . $status['amount'], $details['in_honor_email_message'] ) ) );
 
 		// Send email
 		@wp_mail( sanitize_email( $status['in_honor_email'] ), $subject, $message, $headers );
