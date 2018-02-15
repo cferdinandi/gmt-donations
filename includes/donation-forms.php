@@ -40,7 +40,7 @@
 
 		// Variables
 		$currencies = gmt_donations_settings_field_currency_choices();
-		$total = get_post_meta( $form['id'], 'gmt_donations_total_donated', true );
+		$total = intval(get_post_meta( $form['id'], 'gmt_donations_total_donated', true ));
 		$progress = $total / $form['details']['goal_target'] * 100;
 		$percent = ( $progress < 100 ? $progress : 100 );
 
