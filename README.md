@@ -1,4 +1,7 @@
-# GMT Donations
+# [DEPRECATED] GMT Donations
+
+_**Deprecation Notice:** This plugin has been deprecated and will no longer be supported._
+
 A WordPress plugin that lets you create powerful donation forms that integrate with Stripe and PayPal Express Checkout. See a live working example on [PAWS New England](https://pawsnewengland.com/donate/).
 
 ![An example donation form](screenshots/donation-form.jpg)
